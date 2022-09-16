@@ -19,7 +19,13 @@ class LoginViewController: UIViewController {
         
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                // ...
+                if let e = error {
+                    // for deployment create an error pop up for the user
+                    print(e)
+                } else {
+                    // Navigate to chat view controller
+                    self.performSegue(withIdentifier: "LoginToChat", sender: self)
+                }
                 
             }
             
